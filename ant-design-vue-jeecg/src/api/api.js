@@ -8,9 +8,18 @@ const editRole = (params)=>putAction("/sys/role/edit",params);
 const checkRoleCode = (params)=>getAction("/sys/role/checkRoleCode",params);
 const queryall = (params)=>getAction("/sys/role/queryall",params);
 
+
+//获取本地的用户信息
+
+const getLocalUserInfo = () => {
+  // return JSON.parse(localStorage.getItem('login'));
+  return JSON.parse(localStorage.getItem('login'));
+}
 //用户管理
 const addUser = (params)=>postAction("/sys/user/add",params);
+const isAdmin = (params)=>getAction("/sys/user/isAdmin",params);
 const editUser = (params)=>putAction("/sys/user/edit",params);
+export const editUserScore = (params)=>putAction("/sys/user/updateScore",params);
 const queryUserRole = (params)=>getAction("/sys/user/queryUserRole",params);
 const getUserList = (params)=>getAction("/sys/user/list",params);
 const frozenBatch = (params)=>putAction("/sys/user/frozenBatch",params);
@@ -79,6 +88,7 @@ const doReleaseData = (params)=>getAction("/sys/annountCement/doReleaseData",par
 const doReovkeData = (params)=>getAction("/sys/annountCement/doReovkeData",params);
 //获取系统访问量
 const getLoginfo = (params)=>getAction("/sys/loginfo",params);
+
 const getVisitInfo = (params)=>getAction("/sys/visitInfo",params);
 
 // 根据部门主键查询用户信息
@@ -103,6 +113,7 @@ export const transitRESTful = {
 export {
   // imgView,
   // doMian,
+  isAdmin,
   addRole,
   editRole,
   checkRoleCode,
@@ -157,7 +168,8 @@ export {
   saveDeptRolePermission,
   queryMyDepartTreeList,
   getUserNoticeInfo,
-  getDictItemsFromCache
+  getDictItemsFromCache,
+  getLocalUserInfo
 }
 
 

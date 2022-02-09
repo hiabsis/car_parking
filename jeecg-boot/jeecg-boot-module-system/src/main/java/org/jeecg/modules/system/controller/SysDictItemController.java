@@ -92,7 +92,7 @@ public class SysDictItemController {
 	 * @param sysDictItem
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
+//	@RequiresRoles({"admin"})
 	@RequestMapping(value = "/edit",  method = { RequestMethod.PUT,RequestMethod.POST })
 	@CacheEvict(value={CacheConstant.SYS_DICT_CACHE, CacheConstant.SYS_ENABLE_DICT_CACHE}, allEntries=true)
 	public Result<SysDictItem> edit(@RequestBody SysDictItem sysDictItem) {
@@ -159,7 +159,7 @@ public class SysDictItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/dictItemCheck", method = RequestMethod.GET)
-	@ApiOperation("字典重复校验接口")
+//	@ApiOperation("字典重复校验接口")
 	public Result<Object> doDictItemCheck(SysDictItem sysDictItem, HttpServletRequest request) {
 		int num = 0;
 		LambdaQueryWrapper<SysDictItem> queryWrapper = new LambdaQueryWrapper<SysDictItem>();

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.models.auth.In;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.vo.SysUserCacheInfo;
 import org.jeecg.modules.system.entity.SysUser;
@@ -36,6 +37,11 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	public Result<?> resetPassword(String username, String oldpassword, String newpassword, String confirmpassword);
+	/**
+	 * 更新积分
+	 * @return
+	 */
+	public Result<?> updateScore(Integer score,String username);
 
 	/**
 	 * 修改密码

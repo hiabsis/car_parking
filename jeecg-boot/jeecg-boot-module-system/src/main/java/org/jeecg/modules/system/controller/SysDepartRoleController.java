@@ -30,13 +30,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
  /**
- * @Description: 部门角色
+ * @Description: 角色
  * @Author: jeecg-boot
  * @Date:   2020-02-12
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags="部门角色")
+@Api(tags="角色")
 @RestController
 @RequestMapping("/sys/sysDepartRole")
 public class SysDepartRoleController extends JeecgController<SysDepartRole, ISysDepartRoleService> {
@@ -64,7 +64,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @param req
 	 * @return
 	 */
-	@ApiOperation(value="部门角色-分页列表查询", notes="部门角色-分页列表查询")
+	@ApiOperation(value="角色-分页列表查询", notes="角色-分页列表查询")
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(SysDepartRole sysDepartRole,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -99,7 +99,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
-	@ApiOperation(value="部门角色-添加", notes="部门角色-添加")
+	@ApiOperation(value="角色-添加", notes="角色-添加")
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.save(sysDepartRole);
@@ -113,7 +113,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
-	@ApiOperation(value="部门角色-编辑", notes="部门角色-编辑")
+	@ApiOperation(value="角色-编辑", notes="角色-编辑")
 	@PutMapping(value = "/edit")
 	public Result<?> edit(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.updateById(sysDepartRole);
@@ -127,8 +127,8 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
-	@AutoLog(value = "部门角色-通过id删除")
-	@ApiOperation(value="部门角色-通过id删除", notes="部门角色-通过id删除")
+	@AutoLog(value = "角色-通过id删除")
+	@ApiOperation(value="角色-通过id删除", notes="角色-通过id删除")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		sysDepartRoleService.removeById(id);
@@ -142,7 +142,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
-	@AutoLog(value = "部门角色-批量删除")
+	@AutoLog(value = "角色-批量删除")
 	@ApiOperation(value="部门角色-批量删除", notes="部门角色-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
@@ -156,7 +156,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	 * @param id
 	 * @return
 	 */
-	@ApiOperation(value="部门角色-通过id查询", notes="部门角色-通过id查询")
+	@ApiOperation(value="角色-通过id查询", notes="重复校验接口角色-通过id查询")
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		SysDepartRole sysDepartRole = sysDepartRoleService.getById(id);

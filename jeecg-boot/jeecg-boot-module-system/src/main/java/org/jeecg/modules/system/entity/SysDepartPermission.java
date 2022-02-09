@@ -25,7 +25,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_depart_permission")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_depart_permission对象", description="部门权限表")
+//@ApiModel(value="sys_depart_permission对象", description="部门权限表")
 public class SysDepartPermission {
     
 	/**id*/

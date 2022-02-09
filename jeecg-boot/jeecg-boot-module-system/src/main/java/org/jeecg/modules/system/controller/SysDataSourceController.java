@@ -38,7 +38,7 @@ import java.util.List;
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "多数据源管理")
+//@Api(tags = "多数据源管理")
 @RestController
 @RequestMapping("/sys/dataSource")
 public class SysDataSourceController extends JeecgController<SysDataSource, ISysDataSourceService> {
@@ -56,7 +56,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-分页列表查询")
-    @ApiOperation(value = "多数据源管理-分页列表查询", notes = "多数据源管理-分页列表查询")
+//    @ApiOperation(value = "多数据源管理-分页列表查询", notes = "多数据源管理-分页列表查询")
     @GetMapping(value = "/list")
     public Result<?> queryPageList(
             SysDataSource sysDataSource,
@@ -104,7 +104,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-添加")
-    @ApiOperation(value = "多数据源管理-添加", notes = "多数据源管理-添加")
+//    @ApiOperation(value = "多数据源管理-添加", notes = "多数据源管理-添加")
     @PostMapping(value = "/add")
     public Result<?> add(@RequestBody SysDataSource sysDataSource) {
         try {
@@ -127,7 +127,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-编辑")
-    @ApiOperation(value = "多数据源管理-编辑", notes = "多数据源管理-编辑")
+//    @ApiOperation(value = "多数据源管理-编辑", notes = "多数据源管理-编辑")
     @RequestMapping(value = "/edit", method ={RequestMethod.PUT, RequestMethod.POST})
     public Result<?> edit(@RequestBody SysDataSource sysDataSource) {
         try {
@@ -152,7 +152,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-通过id删除")
-    @ApiOperation(value = "多数据源管理-通过id删除", notes = "多数据源管理-通过id删除")
+//    @ApiOperation(value = "多数据源管理-通过id删除", notes = "多数据源管理-通过id删除")
     @DeleteMapping(value = "/delete")
     public Result<?> delete(@RequestParam(name = "id") String id) {
         SysDataSource sysDataSource = sysDataSourceService.getById(id);
@@ -168,7 +168,7 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-批量删除")
-    @ApiOperation(value = "多数据源管理-批量删除", notes = "多数据源管理-批量删除")
+//    @ApiOperation(value = "多数据源管理-批量删除", notes = "多数据源管理-批量删除")
     @DeleteMapping(value = "/deleteBatch")
     public Result<?> deleteBatch(@RequestParam(name = "ids") String ids) {
         List<String> idList = Arrays.asList(ids.split(","));
@@ -187,8 +187,9 @@ public class SysDataSourceController extends JeecgController<SysDataSource, ISys
      * @return
      */
     @AutoLog(value = "多数据源管理-通过id查询")
-    @ApiOperation(value = "多数据源管理-通过id查询", notes = "多数据源管理-通过id查询")
+//    @ApiOperation(value = "多数据源管理-通过id查询", notes = "多数据源管理-通过id查询")
     @GetMapping(value = "/queryById")
+//    @GetMapping(value = "/queryById")
     public Result<?> queryById(@RequestParam(name = "id") String id) {
         SysDataSource sysDataSource = sysDataSourceService.getById(id);
         return Result.ok(sysDataSource);

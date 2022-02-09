@@ -11,7 +11,8 @@ import { ACCESS_TOKEN, TENANT_ID } from "@/store/mutation-types"
  * 则映射后端域名，通过 vue.config.js
  * @type {*|string}
  */
-let apiBaseUrl = window._CONFIG['domianURL'] || "/jeecg-boot";
+let apiBaseUrl = "/api";
+// let apiBaseUrl = window._CONFIG['domianURL'] || "/api";
 //console.log("apiBaseUrl= ",apiBaseUrl)
 // 创建 axios 实例
 const service = axios.create({

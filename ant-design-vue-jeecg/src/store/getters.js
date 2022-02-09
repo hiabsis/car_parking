@@ -7,6 +7,7 @@ const getters = {
   token: state => state.user.token,
   avatar: state => {state.user.avatar = Vue.ls.get(USER_INFO).avatar; return state.user.avatar},
   username: state => state.user.info.username,
+  id: state => state.user.info.id,
   nickname: state => {state.user.info.realname = Vue.ls.get(USER_INFO).realname; return state.user.info.realname},
   welcome: state => state.user.welcome,
   permissionList: state => state.user.permissionList,

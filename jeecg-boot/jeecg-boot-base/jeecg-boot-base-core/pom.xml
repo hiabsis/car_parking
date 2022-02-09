@@ -34,7 +34,8 @@
 		<!--jeecg-tools-->
 		<dependency>
 			<groupId>org.jeecgframework.boot</groupId>
-			<artifactId>jeecg-boot-base-tools</artifactId>
+			<artifactId>jeecg-boot-badf fbd
+				se-tools</artifactId>
 		</dependency>
 		<!--集成springmvc框架并实现自动配置 -->
 		<dependency>

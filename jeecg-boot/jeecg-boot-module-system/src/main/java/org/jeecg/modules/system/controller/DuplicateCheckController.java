@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/sys/duplicate")
-@Api(tags="重复校验")
+//@Api(tags="重复校验")
 public class DuplicateCheckController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class DuplicateCheckController {
 	 * @return
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	@ApiOperation("重复校验接口")
+//	@ApiOperation("重复校验接口")
 	public Result<Object> doDuplicateCheck(DuplicateCheckVo duplicateCheckVo, HttpServletRequest request) {
 		Long num = null;
 

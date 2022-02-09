@@ -26,7 +26,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @TableName("sys_depart_role")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="sys_depart_role对象", description="部门角色")
+//@ApiModel(value="sys_depart_role对象", description="部门角色")
 public class SysDepartRole {
     
 	/**id*/

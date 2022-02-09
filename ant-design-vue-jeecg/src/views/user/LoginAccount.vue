@@ -1,13 +1,14 @@
+
 <template>
     <div>
       <a-form-model ref="form" :model="model" :rules="validatorRules">
         <a-form-model-item required prop="username">
-          <a-input v-model="model.username" size="large" placeholder="请输入帐户名 / admin">
+          <a-input v-model="model.username" size="large" placeholder="请输入帐户名">
             <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
           </a-input>
         </a-form-model-item>
         <a-form-model-item required prop="password">
-          <a-input v-model="model.password" size="large" type="password" autocomplete="false" placeholder="请输入密码 / 123456">
+          <a-input v-model="model.password" size="large" type="password" autocomplete="false" placeholder="请输入密码">
             <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
           </a-input>
         </a-form-model-item>
@@ -134,6 +135,7 @@
             }
             console.log("登录参数", loginParams)
             this.Login(loginParams).then((res) => {
+
               this.$emit('success', res.result)
             }).catch((err) => {
               this.$emit('fail', err)

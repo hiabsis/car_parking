@@ -1,3 +1,4 @@
+<!--登入页面 系统自带  -->
 <template>
   <div class="main">
     <a-form-model class="user-layout-login" @keyup.enter.native="handleSubmit">
@@ -5,17 +6,13 @@
         <a-tab-pane key="tab1" tab="账号密码登录">
           <login-account ref="alogin" @validateFail="validateFail" @success="requestSuccess" @fail="requestFailed"></login-account>
         </a-tab-pane>
-
-        <a-tab-pane key="tab2" tab="手机号登录">
-          <login-phone ref="plogin" @validateFail="validateFail" @success="requestSuccess" @fail="requestFailed"></login-phone>
-        </a-tab-pane>
       </a-tabs>
 
       <a-form-model-item>
-        <a-checkbox @change="handleRememberMeChange" default-checked>自动登录</a-checkbox>
-        <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">
-          忘记密码
-        </router-link>
+<!--        <a-checkbox @change="handleRememberMeChange" default-checked>自动登录</a-checkbox>-->
+<!--        <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">-->
+<!--          忘记密码-->
+<!--        </router-link>-->
         <router-link :to="{ name: 'register'}" class="forge-password" style="float: right;margin-right: 10px" >
           注册账户
         </router-link>
@@ -30,29 +27,29 @@
 
     <two-step-captcha v-if="requiredTwoStepCaptcha" :visible="stepCaptchaVisible" @success="stepCaptchaSuccess" @cancel="stepCaptchaCancel"></two-step-captcha>
     <login-select-tenant ref="loginSelect" @success="loginSelectOk"></login-select-tenant>
-    <third-login ref="thirdLogin"></third-login>
+<!--    <third-login ref="thirdLogin"></third-login>-->
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import { ACCESS_TOKEN, ENCRYPTED_STRING } from '@/store/mutation-types'
-import ThirdLogin from './third/ThirdLogin'
+// import ThirdLogin from './third/ThirdLogin'
 import LoginSelectTenant from './LoginSelectTenant'
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { getEncryptedString } from '@/utils/encryption/aesEncrypt'
 import { timeFix } from '@/utils/util'
 
 import LoginAccount from './LoginAccount'
-import LoginPhone from './LoginPhone'
+import {getLocalUserInfo, getLoginfo} from "@api/api";
 
 export default {
     components: {
       LoginSelectTenant,
       TwoStepCaptcha,
-      ThirdLogin,
+      // ThirdLogin,
       LoginAccount,
-      LoginPhone
+
     },
     data () {
       return {
@@ -106,6 +103,8 @@ export default {
       },
       // 登录后台成功
       requestSuccess(loginResult){
+        localStorage.setItem("login",JSON.stringify(loginResult.userInfo))
+        localStorage.setItem("token",JSON.stringify(loginResult.token))
         this.$refs.loginSelect.show(loginResult)
       },
       //登录后台失败

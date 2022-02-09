@@ -13,7 +13,9 @@ export const JeecgListMixin = {
   data(){
     return {
       /* 查询条件-请不要在queryParam中声明非字符串值的属性 */
-      queryParam: {},
+      queryParam: {
+
+      },
       /* 数据源 */
       dataSource:[],
       /* 分页参数 */
@@ -223,6 +225,7 @@ export const JeecgListMixin = {
       }
       console.log('currentIndex',currentIndex)
     },
+
     handleEdit: function (record) {
       this.$refs.modalForm.edit(record);
       this.$refs.modalForm.title = "编辑";
@@ -251,12 +254,19 @@ export const JeecgListMixin = {
     getPopupField(fields){
       return fields.split(',')[0]
     },
+    modalScoreForm(){
+      // 新增/修改 成功时，重载列表
+      this.loadData();
+      //清空列表选中
+      this.onClearSelected()
+    },
     modalFormOk() {
       // 新增/修改 成功时，重载列表
       this.loadData();
       //清空列表选中
       this.onClearSelected()
     },
+
     handleDetail:function(record){
       this.$refs.modalForm.edit(record);
       this.$refs.modalForm.title="详情";

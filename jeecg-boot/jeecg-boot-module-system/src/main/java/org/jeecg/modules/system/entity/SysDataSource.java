@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @TableName("sys_data_source")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "sys_data_source对象", description = "多数据源管理")
+//@ApiModel(value = "sys_data_source对象", description = "多数据源管理")
 public class SysDataSource {
 
     /**

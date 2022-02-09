@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jeecg.dingtalk.api.user.vo.UserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -24,6 +25,9 @@ import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.util.JwtUtil;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.*;
+import org.jeecg.modules.car.constants.OrderConstants;
+import org.jeecg.modules.car.entity.UserOrder;
+import org.jeecg.modules.car.service.IUserOrderService;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
@@ -87,6 +91,8 @@ public class SysUserController {
 
 	@Autowired
 	private RedisUtil redisUtil;
+    @Autowired
+    private IUserOrderService userOrderService;
 
     @Value("${jeecg.path.upload}")
     private String upLoadPath;
@@ -94,6 +100,20 @@ public class SysUserController {
     @Resource
     private BaseCommonService baseCommonService;
 
+
+    @RequestMapping(value = "/isAdmin", method = RequestMethod.GET)
+    public Result<?> isAdmin(@RequestParam(name="userId") String userId) {
+        List<SysUserRole> userRole = sysUserRoleService.list(new QueryWrapper<SysUserRole>().lambda().eq(SysUserRole::getUserId, userId));
+        boolean isAdmin = false;
+        for (int i=0;i<userRole.size();i++){
+            if (userRole.get(i).getRoleId().equals("f6817f48af4fb3af11b9e8bf182f618b")){
+                isAdmin = true;
+               break;
+            }
+        }
+        return Result.OK(isAdmin);
+
+    }
     /**
      * 获取用户列表数据
      * @param user
@@ -540,6 +560,30 @@ public class SysUserController {
 		return result;
 	}
 
+
+
+    /**
+     * 首页用户充值积分
+     */
+    //@RequiresRoles({"admin"})
+    @RequestMapping(value = "/updateScore", method = RequestMethod.PUT)
+    public Result<?> updateScore(@RequestBody JSONObject json) {
+        Integer score = json.getInteger("score");
+        String username = json.getString("username");
+        LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
+
+        SysUser user = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
+        if(user==null) {
+            return Result.error("用户不存在！");
+        }
+        // 订单日志
+        UserOrder userOrder= new UserOrder().setUserId(user.getId()).setOrderTime(new Date())
+                .setType(OrderConstants.SCORE_ADDING).setStatus(OrderConstants.ORDER_STATUS_PAY)
+                .setCost(""+score).
+                setOrderNumner(DateUtils.getDate("yyMMddHHmmss"));
+        this.userOrderService.save(userOrder);
+        return  sysUserService.updateScore(score,username);
+    }
 	/**
 	 * 首页用户重置密码
 	 */
@@ -914,16 +958,16 @@ public class SysUserController {
                 return result;
             }
         }
-        if(null == code){
-            result.setMessage("手机验证码失效，请重新获取");
-            result.setSuccess(false);
-            return result;
-        }
-		if (!smscode.equals(code.toString())) {
-			result.setMessage("手机验证码错误");
-			result.setSuccess(false);
-			return result;
-		}
+//        if(null == code){
+//            result.setMessage("手机验证码失效，请重新获取");
+//            result.setSuccess(false);
+//            return result;
+//        }
+//		if (!smscode.equals(code.toString())) {
+//			result.setMessage("手机验证码错误");
+//			result.setSuccess(false);
+//			return result;
+//		}
 
 		try {
 			user.setCreateTime(new Date());// 设置创建时间
@@ -938,7 +982,7 @@ public class SysUserController {
 			user.setStatus(CommonConstant.USER_UNFREEZE);
 			user.setDelFlag(CommonConstant.DEL_FLAG_0);
 			user.setActivitiSync(CommonConstant.ACT_SYNC_0);
-			sysUserService.addUserWithRole(user,"ee8626f80f7c2619917b6236f3a7f02b");//默认临时角色 test
+			sysUserService.addUserWithRole(user,"1480096101997604865");//默认普通用户
 			result.success("注册成功");
 		} catch (Exception e) {
 			result.error500("注册失败");

@@ -2,6 +2,7 @@ package org.jeecg.common.system.vo;
 
 import java.util.Date;
 
+import io.swagger.models.auth.In;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -115,5 +116,8 @@ public class LoginUser {
 
 	/**设备id uniapp推送用*/
 	private String clientId;
+
+	/**设备id uniapp推送用*/
+	private Integer score;
 
 }

@@ -16,6 +16,7 @@ import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.common.util.UUIDGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.base.service.BaseCommonService;
+import org.jeecg.modules.car.entity.Card;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.mapper.*;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
@@ -88,7 +89,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return Result.ok("密码重置成功!");
     }
 
-    @Override
+	@Override
+	public Result<?> updateScore(Integer score,String username) {
+		SysUser user = userMapper.getUserByName(username);
+		user.setScore(user.getScore()+score);
+		this.userMapper.updateById(user);
+ 			return Result.ok("充值成功!");
+	}
+
+	@Override
     @CacheEvict(value = {CacheConstant.SYS_USERS_CACHE}, allEntries = true)
     public Result<?> changePassword(SysUser sysUser) {
         String salt = oConvertUtils.randomGen(8);
@@ -476,6 +485,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 				sysUserDepartMapper.insert(userDeaprt);
 			}
 		}
+//		//step.4 添加会员记录
+//		Card card = new Card().setUserId(user.getId()).setType("1").setStartTime(new Date()).;
 	}
 
 	@Override

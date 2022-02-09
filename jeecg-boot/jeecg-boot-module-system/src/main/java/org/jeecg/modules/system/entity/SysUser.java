@@ -5,6 +5,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import org.jeecg.common.aspect.annotation.Dict;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -84,6 +85,14 @@ public class SysUser implements Serializable {
     @Excel(name = "性别", width = 15,dicCode="sex")
     @Dict(dicCode = "sex")
     private Integer sex;
+
+    /**
+     * 性别（1：男 2：女）
+     */
+    @Excel(name = "性别", width = 15,dicCode="score")
+    @Dict(dicCode = "score")
+    private Integer score;
+
 
     /**
      * 电子邮件
@@ -182,4 +191,12 @@ public class SysUser implements Serializable {
 
     /**设备id uniapp推送用*/
     private String clientId;
+
+    /**用户名称*/
+    @Excel(name = "用户名称", width = 15, dictTable = "sys_user", dicText = "username", dicCode = "id")
+//    @Dict(dictTable = "card", dicText = "type", dicCode = "id")
+    @ApiModelProperty(value = "会员卡Id")
+    private java.lang.String cardId;
+
+
 }
